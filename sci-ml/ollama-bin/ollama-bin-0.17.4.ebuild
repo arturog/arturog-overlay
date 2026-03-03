@@ -77,6 +77,8 @@ src_install() {
 	ewarn "INFO: Models and checksums saved into ${DISTRIBUTED_ATOM} are preserved..."
 	ewarn
 
+	dosym -r "/opt/${PN}/bin/ollama" "/opt/bin/ollama" || die "dosym failed !"
+
 	if use systemd; then
         systemd_dounit "${FILESDIR}"/ollama.service || die "dounit failed !"
 	else

@@ -5,7 +5,6 @@ command="/opt/bin/ollama"
 command_args="serve"
 command_user="ollama"
 command_group="ollama"
-command_background="yes"
 pidfile="/run/ollama.pid"
 log="/var/log/ollama/ollama.log"
 
@@ -15,8 +14,12 @@ log="/var/log/ollama/ollama.log"
 start() {
 	ebegin "Starting $description"
 	exec >> >(logger -t "$RC_SVCNAME Start daemon" -p daemon.info)
-	start-stop-daemon --start --background --user "$command_user" --group "$command_group" \
-			--pidfile "$pidfile" --make-pidfile --exec $command $command_args -1 $log -2 $log
+	start-stop-daemon --start --background \
+		--user "$command_user" \
+		--group "$command_group" \
+		--pidfile "$pidfile" \
+		--make-pidfile \
+		--exec $command $command_args -1 $log -2 $log
 	eend $?
 }
 
