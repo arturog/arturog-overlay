@@ -21,7 +21,7 @@ QA_PREBUILT="*"
 
 DEPEND="app-arch/zstd
 	acct-group/ollama
-	=acct-user/ollama-2
+	acct-user/ollama
 	rocm? ( sci-libs/clblast
 		dev-libs/rocm-opencl-runtime )
 	cuda? ( dev-util/nvidia-cuda-toolkit )
