@@ -20,6 +20,7 @@ DEPEND="net-print/cups"
 RDEPEND="${DEPEND}"
 
 PATCHES=(
+	"${FILESDIR}/enable_velvet_fine_art_paper.patch"
 )
 
 src_configure() {
