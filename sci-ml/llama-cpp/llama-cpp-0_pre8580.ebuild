@@ -34,7 +34,7 @@ SLOT="0"
 CPU_FLAGS_X86=( avx avx2 f16c )
 
 # wwma USE explained here: https://github.com/ggml-org/llama.cpp/blob/master/docs/build.md#hip
-IUSE="curl openblas +openmp blis rocm cuda opencl vulkan flexiblas wmma examples"
+IUSE="curl openblas +openmp blis rocm +rocm_novmm cuda opencl vulkan flexiblas wmma examples"
 
 REQUIRED_USE="
 	?? (
@@ -43,6 +43,9 @@ REQUIRED_USE="
 		flexiblas
 	)
 	wmma? (
+		rocm
+	)
+	rocm_novmm? (
 		rocm
 	)
 "
@@ -147,6 +150,7 @@ src_configure() {
 		mycmakeargs+=(
 			-DGGML_HIP=ON -DAMDGPU_TARGETS=$(get_amdgpu_flags)
 			-DGGML_HIP_ROCWMMA_FATTN=$(usex wmma)
+			-DGGML_HIP_NO_VMM=$(usex rocm_novmm)
 		)
 	fi
 
