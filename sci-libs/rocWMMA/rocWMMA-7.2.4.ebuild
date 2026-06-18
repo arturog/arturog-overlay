@@ -42,6 +42,7 @@ BDEPEND="
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-7.2.0-no-test-install.patch
+	"${FILESDIR}"/10-add-gfx1103-rocWMMA-support.patch
 )
 
 src_prepare() {
