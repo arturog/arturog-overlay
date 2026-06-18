@@ -1,0 +1,84 @@
+diff '--color=auto' -ruN rocwmma/CMakeLists.txt rocwmma-new/CMakeLists.txt
+--- a/CMakeLists.txt	2026-05-28 18:20:45.276818300 +0200
+--- b/CMakeLists.txt	2026-06-18 12:42:44.556505303 +0200
+@@ -111,7 +111,7 @@
+         TARGETS "gfx90a:xnack+;gfx942:xnack+;gfx950:xnack+" )
+ else()
+     rocm_check_target_ids(DEFAULT_GPU_TARGETS
+-        TARGETS "gfx908;gfx90a;gfx942;gfx950;gfx1100;gfx1101;gfx1102;gfx1150;gfx1151;gfx1200;gfx1201" )
++        TARGETS "gfx908;gfx90a;gfx942;gfx950;gfx1100;gfx1101;gfx1102;gfx1103;gfx1150;gfx1151;gfx1200;gfx1201" )
+ endif()
+ 
+ # check if ROCm supports `__hip_fp8_e5m2` and `__hip_fp8_e4m3`
+diff '--color=auto' -ruN rocwmma/docs/api-reference/api-reference-guide.rst rocwmma-new/docs/api-reference/api-reference-guide.rst
+--- a/docs/api-reference/api-reference-guide.rst	2026-05-28 18:20:45.277818400 +0200
+--- b/docs/api-reference/api-reference-guide.rst	2026-06-18 12:42:44.546505144 +0200
+@@ -38,11 +38,12 @@
+ * gfx1100
+ * gfx1101
+ * gfx1102
++* gfx1103
+ * gfx1200
+ * gfx1201
+ 
+ .. note::
+-    gfx11 refers to gfx1100, gfx1101, and gfx1102.
++    gfx11 refers to gfx1100, gfx1101, gfx1102 and gfx1103.
+     gfx12 refers to gfx1200 and gfx1201.
+ 
+ 
+diff '--color=auto' -ruN rocwmma/docs/install/installation.rst rocwmma-new/docs/install/installation.rst
+--- a/docs/install/installation.rst	2026-05-28 18:20:45.278818400 +0200
+--- b/docs/install/installation.rst	2026-06-18 12:42:44.549838530 +0200
+@@ -95,7 +95,7 @@
+       ``F8`` and ``BF8`` data type support requires the gfx942 or gfx950.
+ 
+ *  AMD RDNA class GPUs featuring AI acceleration support, including the
+-   gfx1100, gfx1101, and gfx1102 (collectively known as gfx11), and the gfx1200 and gfx1201 (collectively known as gfx12).
++   gfx1100, gfx1101, gfx1102 and gfx1103 (collectively known as gfx11), and the gfx1200 and gfx1201 (collectively known as gfx12).
+ 
+    .. note::
+ 
+@@ -192,7 +192,7 @@
+         -   **Default value**
+     *   -   ``GPU_TARGETS``
+         -   Build code for specific GPU target(s)
+-        -   ``gfx908``; ``gfx90a``; ``gfx942``; ``gfx950``; ``gfx1100``; ``gfx1101``; ``gfx1102``; ``gfx1200``; ``gfx1201``
++        -   ``gfx908``; ``gfx90a``; ``gfx942``; ``gfx950``; ``gfx1100``; ``gfx1101``; ``gfx1102``; ``gfx1103``; ``gfx1200``; ``gfx1201``
+     *   -   ``ROCWMMA_BUILD_TESTS``
+         -   Build the tests
+         -   ``ON``
+diff '--color=auto' -ruN rocwmma/README.md rocwmma-new/README.md
+--- a/README.md	2026-05-28 18:20:45.276818300 +0200
+--- b/README.md	2026-06-18 12:42:44.553171916 +0200
+@@ -22,7 +22,7 @@
+ rocWMMA currently supports the following AMD GPU architectures:
+ 
+ * CDNA class GPU featuring matrix core support: gfx908, gfx90a, gfx942, gfx950 as 'gfx9'
+-* RDNA class GPU featuring AI acceleration support: gfx1100, gfx1101, gfx1102, gfx1151 as 'gfx11'; gfx1200, gfx1201 as 'gfx12'
++* RDNA class GPU featuring AI acceleration support: gfx1100, gfx1101, gfx1102, gfx1103, gfx1151 as 'gfx11'; gfx1200, gfx1201 as 'gfx12'
+ 
+ Dependencies:
+ 
+@@ -49,8 +49,8 @@
+ 
+ |Option|Description|Default value|
+ |---|---|---|
+-|GPU_TARGETS|Build code for specific GPU target(s)|gfx908;gfx90a;gfx942;gfx950;gfx1100;gfx1101;gfx1102;gfx1151;gfx1200;gfx1201|
+-|AMDGPU_TARGETS|(Deprecated) Build code for specific GPU target(s)|gfx908;gfx90a;gfx942;gfx950;gfx1100;gfx1101;gfx1102;gfx1151;gfx1200;gfx1201|
++|GPU_TARGETS|Build code for specific GPU target(s)|gfx908;gfx90a;gfx942;gfx950;gfx1100;gfx1101;gfx1102;gfx1103;gfx1151;gfx1200;gfx1201|
++|AMDGPU_TARGETS|(Deprecated) Build code for specific GPU target(s)|gfx908;gfx90a;gfx942;gfx950;gfx1100;gfx1101;gfx1102;gfx1103;gfx1151;gfx1200;gfx1201|
+ |ROCWMMA_BUILD_TESTS|Build Tests|ON|
+ |ROCWMMA_BUILD_SAMPLES|Build Samples|ON|
+ |ROCWMMA_BUILD_DOCS|Build doxygen documentation from code|OFF|
+diff '--color=auto' -ruN rocwmma/samples/common.hpp rocwmma-new/samples/common.hpp
+--- a/samples/common.hpp	2026-05-28 18:20:45.290818500 +0200
+--- b/samples/common.hpp	2026-06-18 12:40:05.957114767 +0200
+@@ -91,6 +91,7 @@
+     return ((deviceName.find("gfx1100") != std::string::npos)
+             || (deviceName.find("gfx1101") != std::string::npos)
+             || (deviceName.find("gfx1102") != std::string::npos)
++            || (deviceName.find("gfx1103") != std::string::npos)
+             || (deviceName.find("gfx1150") != std::string::npos)
+             || (deviceName.find("gfx1151") != std::string::npos));
+ }
