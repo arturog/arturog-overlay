@@ -11,15 +11,10 @@ TINY_LLAMAS_COMMIT="99dd1a73db5a37100bd4ae633f4cfce6560e1567"
 
 DESCRIPTION="Port of Facebook's LLaMA model in C/C++ TheTom/llama-cpp-turboquant"
 HOMEPAGE="https://github.com/TheTom/llama-cpp-turboquant"
-
-if [[ ${PV} == *9999* ]]; then
-	inherit git-r3
-else
-	MY_PV="b${PV#0_pre}"
-	SRC_URI="https://github.com/TheTom/llama-cpp-turboquant/archive/refs/tags/feature-turboquant-kv-cache-b9905-4595fff.tar.gz"
-	S="${WORKDIR}/feature-turboquant-kv-cache-b9905-4595fff"
-	KEYWORDS="amd64"
-fi
+MY_PV="b9905-4595fff"
+SRC_URI="https://github.com/TheTom/llama-cpp-turboquant/archive/refs/tags/feature-turboquant-kv-cache-${MY_PV}.tar.gz"
+S="${WORKDIR}/llama-cpp-turboquant-feature-turboquant-kv-cache-${MY_PV}"
+KEYWORDS="amd64"
 
 SRC_URI+="
 	examples? (
