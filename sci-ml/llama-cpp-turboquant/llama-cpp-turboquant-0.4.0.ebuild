@@ -13,7 +13,7 @@ DESCRIPTION="Port of Facebook's LLaMA model in C/C++ TheTom/llama-cpp-turboquant
 HOMEPAGE="https://github.com/TheTom/llama-cpp-turboquant"
 MY_PV="0.4.0"
 SRC_URI="https://github.com/TheTom/llama-cpp-turboquant/archive/refs/tags/tqp-v${MY_PV}.tar.gz"
-S="${WORKDIR}/tqp-v${MY_PV}"
+S="${WORKDIR}/llama-cpp-turboquant-tqp-v${MY_PV}"
 KEYWORDS="amd64"
 
 SRC_URI+="
