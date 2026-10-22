@@ -122,6 +122,8 @@ src_prepare() {
 		cp "${DISTDIR}/ggml-org_models_tinyllamas_stories15M-q4_0-${TINY_LLAMAS_COMMIT}.gguf" \
 			"${BUILD_DIR}/tinyllamas/stories15M-q4_0.gguf" || die
 	fi
+
+	eapply "${FILESDIR}"/30885.patch
 }
 
 src_configure() {
@@ -196,7 +198,9 @@ src_configure() {
 	if use rocm; then
 		rocm_use_hipcc
 		mycmakeargs+=(
-			-DGGML_HIP=ON -DAMDGPU_TARGETS=$(get_amdgpu_flags)
+			-DGGML_HIP=ON
+			-DGPU_TARGETS=$(get_amdgpu_flags)
+			-DAMDGPU_TARGETS=$(get_amdgpu_flags)
 			-DGGML_HIP_ROCWMMA_FATTN=$(usex wmma)
 		)
 	fi
